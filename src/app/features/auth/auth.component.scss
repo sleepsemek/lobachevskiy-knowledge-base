@@ -1,0 +1,60 @@
+@use '../../../styles/helpers/media' as *;
+
+:host {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.auth-section {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 820px);
+  padding: 40px;
+  border-radius: 20px;
+  background-color: var(--color-background-base);
+  gap: 40px;
+
+  @include mobile {
+    padding: 18px;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @include mobile {
+    gap: 32px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+
+    @include mobile {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: end;
+
+    @include mobile-s {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<fq-dialog
+  [open]="open"
+  (closed)="onClosed()"
+>
+  <form (ngSubmit)="submit()" [formGroup]="form" class="dialog__form">
+    <fq-input
+      label="Название подборки"
+      placeholder="Введите название подборки"
+      formControlName="name"
+      [required]="true"
+    ></fq-input>
+
+    <div class="dialog__footer">
+      <fq-button
+        type="submit"
+        [disabled]="form.invalid"
+        [loading]="saving"
+        class="dialog__submit"
+      >
+        Создать подборку
+      </fq-button>
+    </div>
+  </form>
+</fq-dialog>

@@ -1,0 +1,81 @@
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  width: 100%;
+}
+
+.footer {
+  padding-inline: 20px;
+
+  @include mobile {
+    font-size: 16px;
+    padding-inline: 12px;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: var(--footer-height);
+    background-color: var(--color-background-surface);
+    font-size: 20px;
+    gap: 12px;
+    padding-inline: 100px;
+
+    @include tablet {
+      padding-inline: 16px;
+    }
+  }
+
+  &__column {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__link {
+    display: flex;
+    flex-shrink: 0;
+    gap: 20px;
+    align-items: center;
+    border-radius: 8px;
+  }
+
+  &__contacts {
+    &-link {
+      color: var(--color-background-primary);
+      font-weight: 500;
+
+      @include mobile {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__aside {
+    font-weight: 600;
+
+    @include mobile-s {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+    }
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__text {
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+
+  &__item {
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+}

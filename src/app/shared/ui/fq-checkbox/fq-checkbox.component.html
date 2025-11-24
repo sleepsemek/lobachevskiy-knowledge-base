@@ -1,0 +1,24 @@
+<div class="checkbox-wrapper">
+  <div
+    class="checkbox"
+    [class.checked]="value"
+    [class.disabled]="disabled"
+    [attr.aria-checked]="value"
+    [attr.aria-labelledby]="labelId"
+    [attr.aria-required]="required"
+    role="checkbox"
+    tabindex="0"
+    #checkboxElement>
+    @if (value) {
+      <svg class="checkmark" width="14" height="11" viewBox="0 0 14 11">
+        <path d="M1 5.5L4.5 9L13 1" stroke="currentColor" stroke-width="2" fill="none"/>
+      </svg>
+    }
+  </div>
+  <label [id]="labelId" class="checkbox-label">
+    {{ label }}
+    @if (required) {
+      <span aria-hidden="true" class="required-marker">*</span>
+    }
+  </label>
+</div>

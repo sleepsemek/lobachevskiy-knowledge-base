@@ -1,0 +1,37 @@
+:root {
+  --color-background-surface: #f2f2f2;
+  --color-background-base: #fff;
+  --color-background-surface-hover: #E9E9E9;
+  --color-background-primary: #004ea8;
+  --color-background-primary-active: #102b6d;
+  --color-text-on-primary: #fff;
+  --color-background-error: #faebeb;
+  --color-text-error: #e64646;
+  --color-background-success: #e2f4e7;
+  --input-border-success: 1px solid #1F8C33;
+  --color-text-success: #1F8C33;
+  --color-background-warning: #fffbeb;
+  --input-border-warning: 1px solid #fde68a;
+  --color-text-warning: #b45309;
+  --color-background-info: #eff6ff;
+  --input-border-info: 1px solid #bfdbfe;
+  --color-text-info: #1d4ed8;
+  --color-background-disabled: #8a8a8e;
+  --color-text-disabled: #fff;
+  --color-text: #1a1a1a;
+  --color-text-light: #8a8a8e;
+  --color-background-light: #f2f5f9;
+  --color-border: rgb(0 0 0 / 12%);
+  --color-background-input: #fff;
+  --border-primary-active: 1px solid var(--color-background-primary-active);
+  --border-primary: 1px solid var(--color-background-primary);
+  --input-border: 1px solid var(--color-border);
+  --input-border-focus: 2px solid var(--color-background-primary);
+  --input-border-error: 2px solid var(--color-text-error);
+  --font-family-base: inter, roboto, sans-serif;
+  --box-shadow: 0 0 2px #00000014,0 2px 20px #00000014;
+  --transition-duration: 0.2s;
+  --header-height: 66px;
+  --footer-height: 150px;
+}
+

@@ -1,0 +1,17 @@
+<article class="search-card" role="link" tabindex="0" aria-label="Перейти к файлу" [routerLink]="['document', searchResult.document_id]">
+  <div class="search-card__icon">
+    <fq-file-icon [extension]="'TXT'"/>
+  </div>
+
+  <h3 class="search-card__title">
+    {{ searchResult.title }}
+  </h3>
+  <div class="search-card__tags">
+    <fq-badge>{{ searchResult.is_actual ? 'Актуальная редакция' : 'В архиве' }}</fq-badge>
+  </div>
+  <span class="search-card__date">{{ searchResult.date | date:'dd.MM.yyyy' }}</span>
+
+  <div class="search-card__body">
+    <p class="search-card__description">{{ (searchResult.snippet.length > 200) ? (searchResult.snippet | slice:0:300) + '...' : searchResult.snippet }}</p>
+  </div>
+</article>

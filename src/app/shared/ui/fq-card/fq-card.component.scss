@@ -1,0 +1,26 @@
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  width: 100%;
+  padding: 30px;
+  border: var(--border-primary);
+  border-radius: 30px;
+  background-color: var(--color-background-base);
+  box-shadow: var(--box-shadow);
+
+  @include mobile {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  & * {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+
+    @include mobile {
+      gap: 12px;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<h1 class="collections__title">Связанные документы</h1>
+<section class="collections__actions">
+  <h2 class="visually-hidden">Поиск по документам</h2>
+
+  <ng-template #searchIcon>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </ng-template>
+
+  <fq-input
+    placeholder="Поиск по документам"
+    type="text"
+    size="large"
+    [required]="false"
+    [iconTpl]="searchIcon"
+    (valueChange)="onSearchChange($event)"
+  ></fq-input>
+</section>
+
+<section class="collections__section" aria-labelledby="documents-section">
+  <h2 class="visually-hidden" id="documents-section">Список связанных документов</h2>
+
+  <ul class="collections__list">
+    @for (document of filteredDocuments(); track document.document_id) {
+      <li class="collections__item">
+        <article class="collection">
+          <div class="collection__body">
+            <ul class="collection__documents">
+              <li class="collection__document">
+                <a
+                  class="collection__document-link"
+                  [routerLink]="['/document', document.document_id]"
+                >
+                  <span class="collection__document-title">
+                    {{ document.title }}
+                  </span>
+
+                  <div class="collection__document-meta">
+                    <span class="collection__document-date">
+                      {{ document.upload_date | date:'dd.MM.yyyy' }}
+                    </span>
+
+                    <fq-badge [variant]="document.is_actual ? 'success' : 'error'">
+                      {{ document.is_actual ? 'Актуальный' : 'В архиве' }}
+                    </fq-badge>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </li>
+    } @empty {
+      <li class="collections__empty">
+        <p>Нет связанных документов</p>
+      </li>
+    }
+  </ul>
+</section>

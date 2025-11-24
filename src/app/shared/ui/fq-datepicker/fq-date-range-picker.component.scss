@@ -1,0 +1,107 @@
+@use '../../../../styles/helpers/media' as *;
+
+.fq-datepicker .p-datepicker {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 16px 24px 16px 10px;
+  border: 1px solid transparent !important;
+  border-radius: 8px;
+  outline: var(--input-border);
+  background-color: var(--color-background-input);
+  transition:
+    outline-color var(--transition-duration),
+    outline-width var(--transition-duration)
+  ;
+  gap: 8px;
+
+  @include mobile {
+    padding: 12px;
+  }
+
+  &-day-selected-range,
+  &-day-selected-month {
+    background-color: var(--color-background-surface-hover);
+    color: var(--color-background-primary);
+  }
+
+  &-input {
+    width: 100%;
+    min-height: 28px;
+    outline: none;
+    font-family: inherit;
+    font-size: 20px;
+    transition: font-size 0s;
+
+    @include mobile {
+      font-size: 16px;
+    }
+
+    &::placeholder {
+      color: var(--color-text-light);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &-icon-container {
+      position: static;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-text-light);
+
+      & svg {
+        height: 21px;
+      }
+    }
+  }
+
+  &:focus-within {
+    outline: var(--input-border-focus);
+    outline-offset: -2px;
+    background-color: var(--color-background-input);
+  }
+
+  &-panel {
+    padding: 12px;
+    border-radius: 8px;
+    outline: var(--input-border);
+    background-color: var(--color-background-input);
+    font-size: 16px;
+    box-shadow: var(--box-shadow);
+    margin-block: 35px;
+  }
+
+  &-header {
+    padding: 10px;
+  }
+
+  &-weekday,
+  &-day,
+  &-year,
+  &-month,
+  &-decade {
+    font-size: 14px;
+  }
+
+  &-title {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+  }
+
+  &-day {
+    border-radius: 8px;
+
+    &:focus-within {
+      outline: var(--border-primary-active);
+    }
+
+    &-selected {
+      border-radius: 8px;
+      background-color: var(--color-background-primary);
+      color: var(--color-text-on-primary);
+    }
+  }
+}

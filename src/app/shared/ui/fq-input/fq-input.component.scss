@@ -1,0 +1,141 @@
+@use '../../../../styles/helpers/media' as *;
+@use '../../../../styles/helpers/mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input {
+  position: relative;
+  display: flex;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: var(--input-border);
+  background-color: var(--color-background-input);
+  transition:
+    outline-color var(--transition-duration),
+    outline-width var(--transition-duration),
+    background-color var(--transition-duration),
+    color var(--transition-duration);
+  cursor: text;
+  gap: 8px;
+
+  &--ai {
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: linear-gradient(to bottom, #03A5AB 0%, #8B3DFF 100%);
+      filter: blur(6px);
+    }
+  }
+
+  &:has(.input__field:focus-visible) {
+    outline: var(--input-border-focus);
+    outline-offset: -2px;
+    background-color: var(--color-background-input);
+  }
+
+  &:has(.input__icon) {
+    gap: 5px;
+    padding-left: 9px;
+  }
+
+  &--small {
+    padding: 8px 14px;
+  }
+
+  &--medium {
+    padding: 12px 16px;
+  }
+
+  &--large {
+    padding: 16px 24px;
+    font-size: 20px;
+
+    @include mobile {
+      padding: 12px;
+      font-size: 16px;
+    }
+  }
+
+  &.input--error {
+    outline: var(--input-border-error);
+    outline-offset: -2px;
+    background: var(--color-background-error);
+  }
+
+  &.input--disabled {
+    background: var(--color-background-disabled);
+    cursor: not-allowed;
+  }
+
+  &__field {
+    width: 100%;
+    min-height: 28px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: inherit;
+
+    &::placeholder {
+      color: var(--color-text-light);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-light);
+  }
+
+  &__clear {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    background: none;
+    transition: var(--transition-duration);
+    cursor: pointer;
+    aspect-ratio: 1;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__error {
+    margin-top: 4px;
+    color: var(--color-text-error);
+    font-weight: 400;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 800;
+
+    @include mobile-above {
+      font-size: 16px;
+    }
+
+    &-required {
+      color: var(--color-text-error);
+    }
+  }
+
+  &__cross {
+    @include cross
+  }
+}

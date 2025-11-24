@@ -1,0 +1,52 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="upload">
+  <h1 class="upload__title">Загрузка документа</h1>
+
+  <section class="upload__file-column">
+    <h2 class="visually-hidden">Загрузите файл</h2>
+    <fq-file-upload #fileUploadComponent (fileSelected)="onFileSelected($event)"></fq-file-upload>
+  </section>
+
+  <section class="upload__metadata">
+    <h2 class="visually-hidden">Заполните форму</h2>
+
+    <div class="upload__header">
+      <fq-input
+        formControlName="title"
+        label="Название"
+        placeholder="Введите название документа"
+        size="large"
+        [required]="true"
+      ></fq-input>
+
+      <fq-select
+        label="Подразделение"
+        placeholder="Выберите подразделение"
+        [options]="departments()"
+        formControlName="department_id"
+        [required]="true"
+        [disabled]="loadingDepartments()"
+      ></fq-select>
+
+      <fq-input
+        formControlName="tags"
+        label="Теги"
+        placeholder="Тег 1, Тег 2, ..."
+        size="large"
+      ></fq-input>
+    </div>
+
+    <div class="upload__footer">
+      <fq-button
+        type="submit"
+        variant="primary"
+        size="large"
+        [disabled]="form.invalid || !uploadedFile || loading"
+        [loading]="loading"
+        [fullWidth]="true"
+        class="upload__button"
+      >
+        Загрузить документ
+      </fq-button>
+    </div>
+  </section>
+</form>

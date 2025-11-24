@@ -1,0 +1,95 @@
+<h1 class="profile__title">Личный кабинет</h1>
+
+<section class="profile__activity">
+  <h2 class="visually-hidden">Активность</h2>
+
+  @if (isStatisticsLoading) {
+    <div class="profile-loading">
+      <fq-spinner class="profile-spinner"/>
+    </div>
+  } @else {
+    <fq-card as="article" class="profile__activity-card activity-card">
+      <h3 class="activity-card__title">Статистика</h3>
+      <dl class="activity-card__term-list term-list">
+        <dt class="term-list__term">Загружено документов</dt>
+        <dd class="term-list__definition">{{ userStatistics?.documents_created ?? 0 }}</dd>
+
+        <dt class="term-list__term">Отредактировано данных</dt>
+        <dd class="term-list__definition">{{ userStatistics?.documents_updated ?? 0 }}</dd>
+
+        <dt class="term-list__term">Создано подборок</dt>
+        <dd class="term-list__definition">{{ userStatistics?.collections_created ?? 0 }}</dd>
+
+        <dt class="term-list__term">Последнее действие</dt>
+        <dd class="term-list__definition">
+          {{ userStatistics?.last_action_at ? (userStatistics?.last_action_at | date:'dd.MM.yyyy HH:mm') : '-' }}
+        </dd>
+      </dl>
+    </fq-card>
+
+    <fq-card as="article" class="profile__activity-card activity-card">
+      <h3 class="activity-card__title">Последние действия</h3>
+      <dl class="activity-card__term-list term-list">
+        @for (action of userRecentActions?.items; track action.action) {
+          <dt class="term-list__term">{{ action.action }}</dt>
+          <dd class="term-list__definition">{{ action.created_at | date:'dd.MM.yyyy HH:mm' }}</dd>
+        } @empty {
+          <dt class="term-list__term">Нет действий</dt>
+        }
+      </dl>
+    </fq-card>
+  }
+</section>
+
+<section class="profile__user user">
+  <h2 class="visually-hidden">Личные данные</h2>
+
+  @if (isUserLoading) {
+    <div class="profile-loading profile-loading--padded">
+      <fq-spinner class="profile-spinner"/>
+    </div>
+  } @else if (userData) {
+    <fq-badge class="user__role">{{ userData.role_name || 'Пользователь' }}</fq-badge>
+
+    <div class="user__card">
+      <h3 class="user__initials">{{ getFullName(userData) }}</h3>
+      <div class="user__avatar">{{ getInitials(userData) }}</div>
+      <div class="user__department h3">{{ userData.department_name || 'Подразделение не указано' }}</div>
+      <fq-button
+        shape="square"
+        class="user__edit-button"
+        (click)="openEdit()"
+      >
+        Редактировать
+      </fq-button>
+    </div>
+
+    <div class="user__info">
+      <address class="user__contacts">
+        <p class="user__contacts-link">
+          {{ userData.email }}
+        </p>
+        <p class="user__contacts-link">
+          {{ userData.phone }}
+        </p>
+      </address>
+
+      <h3 class="user__info-subtitle">Доступы</h3>
+      <ul class="user-access__list">
+        @for (access of userData.access_levels || ['Общий доступ']; track access) {
+          <li class="user-access__item">{{ access }}</li>
+        } @empty {
+          <li class="user-access__item">Доступ не указан</li>
+        }
+      </ul>
+    </div>
+  }
+</section>
+
+<app-edit-user-dialog
+  [open]="editOpen"
+  [user]="userData"
+  [saving]="isSaving"
+  (save)="onSave($event)"
+  (closed)="editOpen = false"
+></app-edit-user-dialog>

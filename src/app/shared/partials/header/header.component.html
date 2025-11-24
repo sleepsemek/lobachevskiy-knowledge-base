@@ -1,0 +1,34 @@
+<header class="header content-wrapper">
+  <div class="header__container container">
+    <a routerLink="" class="header__link">
+      <figure class="header__figure">
+        <img class="header__logo" ngSrc="/assets/logo-Y3ByDxSy.svg" alt="База знаний «Лобачевский»" height="42" width="32">
+      </figure>
+      <span class="header__text">База знаний «Лобачевский»</span>
+    </a>
+    <div class="header__controls">
+      @if (user$ | async) {
+        <nav class="header__menu menu">
+          <ul class="menu__list hidden-mobile">
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Главная</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/collections" routerLinkActive="active">Мои подборки</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" routerLink="/upload" routerLinkActive="active">Загрузка документа</a>
+            </li>
+          </ul>
+        </nav>
+        <app-user-menu
+          [user]="user$ | async"
+          (logout)="onLogout()"
+          (profile)="onProfile()"
+          (upload)="onUpload()"
+          (collections)="onCollections()"
+        ></app-user-menu>
+      }
+    </div>
+  </div>
+</header>

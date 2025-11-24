@@ -1,0 +1,44 @@
+@use '../../../../styles/helpers/media' as *;
+
+.icon-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background-color: var(--file-icon-bg-color);
+  color: var(--file-icon-color);
+  aspect-ratio: 1;
+
+  @include mobile {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+  }
+
+  & svg {
+    width: auto;
+    height: 100%;
+    padding: 10px;
+
+    @include mobile {
+      padding: 6px;
+    }
+  }
+}
+
+.extension {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  color: inherit;
+  font-weight: 600;
+  transform: translate(-50%, 0);
+
+  @include mobile {
+    font-size: 12px;
+  }
+}

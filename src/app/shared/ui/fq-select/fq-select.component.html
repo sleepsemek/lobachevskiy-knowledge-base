@@ -1,0 +1,26 @@
+<div class="fq-select">
+  @if (label) {
+    <div class="fq-select__title">
+      @if (required) {
+        <span class="fq-select__title-required">* </span>
+      }
+      <span>{{ label }}</span>
+    </div>
+  }
+
+  <p-select
+    [options]="options"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [ngModel]="selectedOption"
+    (onChange)="handleSelectionChange($event.value)"
+    [class.p-select--large]="size === 'large'"
+    optionLabel="name"
+  ></p-select>
+
+  @if (iconTpl) {
+    <div class="fq-select__icon">
+      <ng-container [ngTemplateOutlet]="iconTpl"></ng-container>
+    </div>
+  }
+</div>

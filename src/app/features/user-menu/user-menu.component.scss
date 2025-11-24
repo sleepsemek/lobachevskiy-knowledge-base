@@ -1,0 +1,95 @@
+@use '../../../styles/helpers/media' as *;
+@use '../../../styles/helpers/mixins' as *;
+
+.user {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: 500;
+
+    @include mobile {
+      @include visually-hidden;
+    }
+  }
+
+  &__name {
+    font-size: 20px;
+    line-height: 1;
+
+    * {
+      display: flex;
+    }
+  }
+
+  &__department {
+    font-size: 14px;
+    text-align: start;
+  }
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    background: none;
+    transition: var(--transition-duration);
+    cursor: pointer;
+  }
+
+  &__dropdown {
+    position: absolute;
+    z-index: 1000;
+    top: 100%;
+    right: 0;
+    min-width: 200px;
+    margin-top: 8px;
+    padding: 4px 0;
+    border: var(--input-border);
+    border-radius: 8px;
+    background: var(--color-background-base);
+    box-shadow: var(--box-shadow);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    transition: var(--transition-duration);
+    cursor: pointer;
+    gap: 8px;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      background-color: var(--color-background-surface);
+    }
+
+    &--danger {
+      color: var(--color-text-error);
+
+      &:hover,
+      &:focus {
+        background-color: var(--color-background-error);
+      }
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    margin: 4px 0;
+    background-color: var(--color-border);
+  }
+}

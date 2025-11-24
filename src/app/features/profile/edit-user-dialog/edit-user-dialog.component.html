@@ -1,0 +1,56 @@
+<fq-dialog
+  [open]="open"
+  (closed)="closed.emit()"
+>
+  <form (ngSubmit)="submit()" [formGroup]="form" class="dialog__form">
+    <fq-input
+      label="Имя"
+      placeholder="Иванов"
+      formControlName="first_name"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="Фамилия"
+      placeholder="Иван"
+      formControlName="last_name"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="Отчество"
+      placeholder="Иванович"
+      formControlName="middle_name"
+      [required]="false"
+    ></fq-input>
+
+    <fq-input
+      label="Телефон"
+      type="tel"
+      placeholder="+7 (999) 123-45-67"
+      mask="+0 (000) 000-00-00"
+      formControlName="phone"
+      [required]="true"
+    ></fq-input>
+
+    <fq-select
+      label="Подразделение"
+      placeholder="Выберите подразделение"
+      [options]="departmentOptions()"
+      formControlName="department_id"
+      [required]="true"
+      [disabled]="loadingDepartments()"
+    ></fq-select>
+
+    <div class="dialog__footer">
+      <fq-button
+        type="submit"
+        [disabled]="form.invalid"
+        [loading]="saving"
+        class="dialog__submit"
+      >
+        Сохранить
+      </fq-button>
+    </div>
+  </form>
+</fq-dialog>

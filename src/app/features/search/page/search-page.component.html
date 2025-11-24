@@ -1,0 +1,142 @@
+<section class="hero" [class.collapsed]="hasData()">
+  <div class="hero__wrapper">
+    <header class="hero__header">
+      <h1 class="hero__title">Умная база документов администрации города Нижнего Новгорода</h1>
+      <div class="hero__preview">
+        <img ngSrc="/assets/file-3d-render.png" alt="" width="452" height="434">
+      </div>
+    </header>
+    <div class="hero__body">
+      <p>Система поможет быстро ориентироваться в нормативных актах и регламентах — введите ваш вопрос и получите выдержки из документов, подобранные по смыслу.</p>
+    </div>
+  </div>
+  <form
+    class="hero__search search-form"
+    [formGroup]="searchForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+    aria-labelledby="search-title"
+  >
+    <h2 class="visually-hidden" id="search-title">Форма поиска</h2>
+
+    <ng-template #searchIcon>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.296 2.043c.407 1.817 1.284 2.716 3.317 3.089.14 0 .255.104.255.233s-.114.233-.255.233c-1.982.373-2.909 1.218-3.315 3.081a.246.246 0 0 1-.243.18.245.245 0 0 1-.245-.191c-.407-1.818-1.28-2.697-3.313-3.07-.14 0-.254-.104-.254-.233s.114-.233.254-.233c1.982-.373 2.91-1.223 3.317-3.087a.247.247 0 0 1 .241-.175c.117 0 .212.074.241.173Z" fill="url(#_3085173834__a)"></path><path d="M15.094 17.436A7.5 7.5 0 1 1 10 4.046v1.503A6 6 0 1 0 16.446 11h1.504a7.466 7.466 0 0 1-1.46 5.003l4.25 4.25a1 1 0 0 1-1.414 1.414l-4.232-4.231Z" fill="url(#_3085173834__b)"></path><path d="M13.666 8.964c-.857-.236-1.356-.615-1.527-1.4 0-.095-.084-.172-.187-.172s-.187.077-.187.171c-.257.786-.67 1.244-1.528 1.401-.103 0-.187.077-.187.171 0 .095.084.172.187.172.857.235 1.357.614 1.528 1.4 0 .095.084.171.187.171s.187-.076.187-.171c.257-.786.67-1.243 1.527-1.4.104 0 .187-.077.187-.172 0-.094-.083-.171-.187-.171Z" fill="url(#_3085173834__c)"></path><defs><linearGradient id="_3085173834__a" x1="-6.063" y1="11.915" x2="13.914" y2="29.878" gradientUnits="userSpaceOnUse"><stop stop-color="#03A5AB"></stop><stop offset="1" stop-color="#8B3DFF"></stop></linearGradient><linearGradient id="_3085173834__b" x1="-6.063" y1="11.915" x2="13.914" y2="29.878" gradientUnits="userSpaceOnUse"><stop stop-color="#03A5AB"></stop><stop offset="1" stop-color="#8B3DFF"></stop></linearGradient><linearGradient id="_3085173834__c" x1="-6.063" y1="11.915" x2="13.914" y2="29.878" gradientUnits="userSpaceOnUse"><stop stop-color="#03A5AB"></stop><stop offset="1" stop-color="#8B3DFF"></stop></linearGradient></defs></svg>
+    </ng-template>
+
+    <fq-input
+      formControlName="query"
+      placeholder="Введите ваш запрос"
+      type="text"
+      variant="ai"
+      size="large"
+      [required]="false"
+      [iconTpl]="searchIcon"
+    ></fq-input>
+
+    <div class="search-form__group">
+      <fq-datepicker
+        formControlName="dateRange"
+        placeholder="Выберите даты"
+        selectionMode="range"
+        [readonlyInput]="true"
+      ></fq-datepicker>
+
+      <ng-template #fileTypesIcon>
+        <svg width="26" height="26" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9 4C8.20435 4 7.44129 4.31607 6.87868 4.87868C6.31607 5.44129 6 6.20435 6 7V23C6 23.7957 6.31607 24.5587 6.87868 25.1213C7.44129 25.6839 8.20435 26 9 26H21C21.7957 26 22.5587 25.6839 23.1213 25.1213C23.6839 24.5587 24 23.7957 24 23V12C24 12 24 12 24 12C24 11.7222 23.8867 11.4709 23.7039 11.2897L16.7734 4.35921C16.749 4.33162 16.7231 4.30578 16.6957 4.28169C16.5093 4.10116 16.2599 4 16 4H9ZM15 6H9C8.73478 6 8.48043 6.10536 8.29289 6.29289C8.10536 6.48043 8 6.73478 8 7V23C8 23.2652 8.10536 23.5196 8.29289 23.7071C8.48043 23.8946 8.73478 24 9 24H21C21.2652 24 21.5196 23.8946 21.7071 23.7071C21.8946 23.5196 22 23.2652 22 23V13H16C15.4477 13 15 12.5523 15 12V6ZM20.5858 11L17 7.41421V11H20.5858Z" fill="#B3B3B3"/>
+        </svg>
+      </ng-template>
+
+      <fq-multi-select
+        formControlName="fileTypes"
+        placeholder="PDF, ..."
+        [options]="transformedFileTypes()"
+        [iconTpl]="fileTypesIcon"
+      ></fq-multi-select>
+    </div>
+
+    <ng-template #departmentsIcon>
+      <svg width="26" height="26" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 5C12.2044 5 11.4413 5.31607 10.8787 5.87868C10.3161 6.44129 10 7.20435 10 8V9H7C6.20435 9 5.44129 9.31607 4.87868 9.87868C4.31607 10.4413 4 11.2044 4 12V22C4 22.7957 4.31607 23.5587 4.87868 24.1213C5.44129 24.6839 6.20435 25 7 25H11H19H23C23.7957 25 24.5587 24.6839 25.1213 24.1213C25.6839 23.5587 26 22.7957 26 22V12C26 11.2043 25.6839 10.4413 25.1213 9.87868C24.5587 9.31607 23.7957 9 23 9H20V8C20 7.20435 19.6839 6.44129 19.1213 5.87868C18.5587 5.31607 17.7956 5 17 5H13ZM18 9V8C18 7.73478 17.8946 7.48043 17.7071 7.29289C17.5196 7.10536 17.2652 7 17 7H13C12.7348 7 12.4804 7.10536 12.2929 7.29289C12.1054 7.48043 12 7.73478 12 8V9H18ZM12 11H18V23H12V11ZM10 11H7C6.73478 11 6.48043 11.1054 6.29289 11.2929C6.10536 11.4804 6 11.7348 6 12V22C6 22.2652 6.10536 22.5196 6.29289 22.7071C6.48043 22.8946 6.73478 23 7 23H10V11ZM20 23V11H23C23.2652 11 23.5196 11.1054 23.7071 11.2929C23.8946 11.4804 24 11.7348 24 12V22C24 22.2652 23.8946 22.5196 23.7071 22.7071C23.5196 22.8946 23.2652 23 23 23H20Z" fill="#B3B3B3"/>
+      </svg>
+    </ng-template>
+
+    <fq-multi-select
+      formControlName="departments"
+      placeholder="Выберите подразделения"
+      [options]="departments()"
+      [iconTpl]="departmentsIcon"
+      optionLabel="name"
+    ></fq-multi-select>
+
+    <ng-template #accessLevelIcon>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 6H6C5.06812 6 4.60192 6 4.23438 6.15224C3.74432 6.35523 3.35523 6.74481 3.15224 7.23486C3 7.60241 3 8.06835 3 9.00023C4.65685 9.00023 6 10.3429 6 11.9998C6 13.6566 4.65685 15 3 15C3 15.9319 3 16.3978 3.15224 16.7654C3.35523 17.2554 3.74432 17.6447 4.23438 17.8477C4.60192 17.9999 5.06812 18 6 18H14M14 6H18C18.9319 6 19.3978 6 19.7654 6.15224C20.2554 6.35523 20.6447 6.74481 20.8477 7.23486C20.9999 7.6024 20.9999 8.06835 20.9999 9.00023C19.343 9.00023 18 10.3431 18 12C18 13.6569 19.343 15 20.9999 15C20.9999 15.9319 20.9999 16.3978 20.8477 16.7654C20.6447 17.2554 20.2554 17.6447 19.7654 17.8477C19.3978 17.9999 18.9319 18 18 18H14M14 6V18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </ng-template>
+
+    <fq-input
+      formControlName="accessLevel"
+      placeholder="Перечислите теги через запятую"
+      type="text"
+      size="large"
+      [required]="false"
+      [iconTpl]="accessLevelIcon"
+    ></fq-input>
+
+    <div class="search-form__footer">
+      <fq-checkbox
+        formControlName="only_active"
+        label="Только действующие редакции"
+      >
+      </fq-checkbox>
+
+      <div class="search-form__footer-group">
+        <fq-select
+          placeholder="Выберите стиль ответа"
+          class="search-select"
+          size="large"
+          [options]="[{id: 1, name: 'Заполнение документов'}, {id: 2, name: 'Служебные переписки'}, {id: 3, name: 'Ответ на обращения граждан'}]"
+          [setDefaultFirst]="true"
+        ></fq-select>
+
+        <fq-button
+          type="submit"
+          variant="primary"
+          size="large"
+          [disabled]="isFormInvalid() || isSameQuery()"
+          [loading]="isLoading()"
+        >
+          Найти документы
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.49587 6.49587C8.25403 4.73772 10.6386 3.75 13.125 3.75C15.6114 3.75 17.996 4.73772 19.7541 6.49587C21.5123 8.25403 22.5 10.6386 22.5 13.125C22.5 15.191 21.8181 17.1867 20.5788 18.8111L25.8839 24.1161C26.372 24.6043 26.372 25.3957 25.8839 25.8839C25.3957 26.372 24.6043 26.372 24.1161 25.8839L18.8111 20.5788C17.1867 21.8181 15.191 22.5 13.125 22.5C10.6386 22.5 8.25403 21.5123 6.49587 19.7541C4.73772 17.996 3.75 15.6114 3.75 13.125C3.75 10.6386 4.73772 8.25403 6.49587 6.49587ZM13.125 6.25C11.3016 6.25 9.55295 6.97433 8.26364 8.26364C6.97433 9.55295 6.25 11.3016 6.25 13.125C6.25 14.9484 6.97433 16.697 8.26364 17.9864C9.55295 19.2757 11.3016 20 13.125 20C14.9484 20 16.697 19.2757 17.9864 17.9864C19.2757 16.697 20 14.9484 20 13.125C20 11.3016 19.2757 9.55295 17.9864 8.26364C16.697 6.97433 14.9484 6.25 13.125 6.25Z" fill="currentColor"/>
+          </svg>
+        </fq-button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section class="search">
+  <h2 class="visually-hidden">Результаты поиска</h2>
+
+  @if (hasData()) {
+    <div class="search__results-list">
+      <div class="search__result-summary">
+        <h3 class="search__result-title">
+          Обзор от ИИ
+          <svg width="31" height="34" viewBox="0 0 31 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 0L11.6546 10.4317L20 12.5L11.6546 14.5683L10 25L8.34537 14.5683L0 12.5L8.34537 10.4317L10 0Z" fill="#004EA8"/>
+            <path d="M24 9L25.1582 16.5108L31 18L25.1582 19.4892L24 27L22.8418 19.4892L17 18L22.8418 16.5108L24 9Z" fill="#004EA8"/>
+            <path d="M16 22L16.8273 27.0072L21 28L16.8273 28.9928L16 34L15.1727 28.9928L11 28L15.1727 27.0072L16 22Z" fill="#004EA8"/>
+          </svg>
+        </h3>
+        {{ searchSummary() }}
+      </div>
+      @for (result of searchResults(); track result.document_id) {
+        <app-document-card [searchResult]="result">
+        </app-document-card>
+      }
+    </div>
+  }
+</section>

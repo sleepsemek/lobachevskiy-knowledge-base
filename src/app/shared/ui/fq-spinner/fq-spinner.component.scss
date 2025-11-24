@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  --fq-spinner-diameter: 20px;
+  --fq-spinner-stroke-width: 2px;
+  --fq-spinner-color: currentcolor;
+}
+
+.spinner {
+  box-sizing: border-box;
+  width: var(--fq-spinner-diameter);
+  height: var(--fq-spinner-diameter);
+  border: var(--fq-spinner-stroke-width) solid var(--fq-spinner-color);
+  border-top: var(--fq-spinner-stroke-width) solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,60 @@
+<fq-dialog
+  [open]="open"
+  (closed)="closed.emit()"
+>
+  <form (ngSubmit)="submit()" [formGroup]="form" class="dialog__form">
+    <fq-input
+      label="Название документа"
+      placeholder="Название документа"
+      formControlName="title"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="ID департамента"
+      placeholder="0"
+      formControlName="department_id"
+      type="number"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="Категория"
+      placeholder="Категория документа"
+      formControlName="category"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="Уровни доступа"
+      placeholder="admin, user, manager (через запятую)"
+      formControlName="access_levels"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="Теги"
+      placeholder="важный, отчет, 2024 (через запятую)"
+      formControlName="tags"
+      [required]="true"
+    ></fq-input>
+
+    <fq-input
+      label="Комментарий"
+      placeholder="Комментарий к документу"
+      formControlName="comment"
+      [required]="true"
+    ></fq-input>
+
+    <div class="dialog__footer">
+      <fq-button
+        type="submit"
+        [disabled]="form.invalid"
+        [loading]="saving"
+        class="dialog__submit"
+      >
+        Сохранить
+      </fq-button>
+    </div>
+  </form>
+</fq-dialog>

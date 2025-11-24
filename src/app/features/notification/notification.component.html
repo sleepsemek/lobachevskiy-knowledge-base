@@ -1,0 +1,19 @@
+<div class="notification-container">
+  @for (notification of notificationService.currentNotifications(); track notification.id) {
+    <div
+      class="notification"
+      [ngClass]="'notification--' + notification.type"
+      role="alert"
+    >
+      <div class="notification__content">
+        <h3 class="notification__title">{{ notification.title }}</h3>
+        <p class="notification__message">{{ notification.message }}</p>
+      </div>
+      <button
+        class="notification__close"
+        (click)="dismiss(notification.id)"
+        aria-label="Закрыть уведомление"
+      ><span class="notification__cross"></span></button>
+    </div>
+  }
+</div>

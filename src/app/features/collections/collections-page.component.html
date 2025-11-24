@@ -1,0 +1,114 @@
+<h1 class="collections__title">Мои подборки</h1>
+<section class="collections__actions">
+  <h2 class="visually-hidden">Поиск и создание коллекций</h2>
+
+  <ng-template #searchIcon>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </ng-template>
+
+  <fq-input
+    placeholder="Поиск по подборкам"
+    type="text"
+    size="large"
+    [required]="false"
+    [iconTpl]="searchIcon"
+    (valueChange)="onSearchChange($event)"
+  ></fq-input>
+  <fq-button
+    shape="square"
+    size="large"
+    aria-label="Создать подборку"
+    (click)="openCreateDialog()"
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 16V13M12 13V10M12 13H9M12 13H15M3 6V16.8C3 17.9201 3 18.4798 3.21799 18.9076C3.40973 19.2839 3.71547 19.5905 4.0918 19.7822C4.5192 20 5.07899 20 6.19691 20H17.8031C18.921 20 19.48 20 19.9074 19.7822C20.2837 19.5905 20.5905 19.2841 20.7822 18.9078C21.0002 18.48 21.0002 17.9199 21.0002 16.7998L21.0002 9.19978C21.0002 8.07967 21.0002 7.51962 20.7822 7.0918C20.5905 6.71547 20.2839 6.40973 19.9076 6.21799C19.4798 6 18.9201 6 17.8 6H12M3 6H12M3 6C3 4.89543 3.89543 4 5 4H8.67452C9.1637 4 9.40886 4 9.63904 4.05526C9.84311 4.10425 10.0379 4.18526 10.2168 4.29492C10.4186 4.41857 10.5918 4.59182 10.9375 4.9375L12 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </fq-button>
+</section>
+
+<section class="collections__section" aria-labelledby="collections-section">
+  <h2 class="visually-hidden" id="collections-section">Список ваших подборок</h2>
+
+  <ul class="collections__list">
+    @for (collection of filteredCollections(); track collection.id) {
+      <li class="collections__item">
+        <article class="collection">
+          <header class="collection__header">
+            <h3 class="collection__title">
+              <button
+                class="collection__toggle"
+                [attr.aria-expanded]="isExpanded(collection.id)"
+                [attr.aria-controls]="'collection-content-' + collection.id"
+                (click)="toggleCollection(collection.id)"
+              >
+                <span class="collection__name">{{ collection.name }}</span>
+                <span class="collection__meta hidden-mobile">
+                  {{ collection.documents_count }} документов ·
+                  {{ collection.created_at | date:'dd.MM.yyyy' }}
+                </span>
+                <span class="collection__icon" aria-hidden="true">
+                  {{ isExpanded(collection.id) ? '−' : '+' }}
+                </span>
+              </button>
+            </h3>
+          </header>
+
+          @if (isExpanded(collection.id)) {
+            <div
+              class="collection__body"
+              [id]="'collection-content-' + collection.id"
+            >
+              @if (collection.documents.length > 0) {
+                <ul class="collection__documents">
+                  @for (document of collection.documents; track document.document_id) {
+                    <li class="collection__document">
+                      <a
+                        class="collection__document-link"
+                        [routerLink]="['/document', document.document_id]"
+                      >
+                        <span class="collection__document-title">
+                          {{ document.title }}
+                        </span>
+
+                        <div class="collection__document-meta">
+                          <span class="collection__document-date">
+                            {{ document.upload_date | date:'dd.MM.yyyy' }}
+                          </span>
+
+                          <fq-badge [variant]="document.is_actual ? 'success' : 'error'">{{ document.is_actual ? 'Актуальный' : 'В архиве' }}</fq-badge>
+
+                          @if (document.tags.length > 0) {
+                            <div class="collection__document-tags hidden-mobile">
+                              @for (tag of document.tags; track tag) {
+                                <fq-badge>{{ tag }}</fq-badge>
+                              }
+                            </div>
+                          }
+                        </div>
+                      </a>
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <p class="collection__empty">В этой подборке пока нет документов</p>
+              }
+            </div>
+          }
+        </article>
+      </li>
+    } @empty {
+      <li class="collections__empty">
+        <p>У вас пока нет подборок</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<app-create-collection-dialog
+  [open]="showCreateDialog()"
+  [saving]="creating()"
+  (save)="createCollection($event)"
+  (closed)="closeCreateDialog()"
+></app-create-collection-dialog>

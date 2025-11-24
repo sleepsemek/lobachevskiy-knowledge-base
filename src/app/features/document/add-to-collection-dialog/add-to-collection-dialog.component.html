@@ -1,0 +1,27 @@
+<fq-dialog
+  [open]="open"
+  (closed)="onClosed()"
+>
+  <form (ngSubmit)="submit()" [formGroup]="form" class="dialog__form">
+<!--    <h2 class="dialog__title">Добавить документ в подборку</h2>-->
+
+    <fq-select
+      label="Выберите подборку"
+      placeholder="Выберите подборку из списка"
+      [options]="collections"
+      formControlName="collectionId"
+      [required]="true"
+    ></fq-select>
+
+    <div class="dialog__footer">
+      <fq-button
+        type="submit"
+        [disabled]="form.invalid"
+        [loading]="saving || loading"
+        class="dialog__submit"
+      >
+        Добавить в подборку
+      </fq-button>
+    </div>
+  </form>
+</fq-dialog>

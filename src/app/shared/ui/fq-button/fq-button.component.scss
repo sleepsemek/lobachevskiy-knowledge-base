@@ -1,0 +1,153 @@
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  @include mobile {
+    width: 100%;
+
+    &:has(.btn--circle) {
+      width: unset;
+    }
+  }
+
+  &:has(.btn--full-width) {
+    width: 100%;
+  }
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 240px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color var(--transition-duration);
+  cursor: pointer;
+  gap: 8px;
+
+  @include mobile {
+    width: 100%;
+    min-width: unset;
+  }
+
+  &__spinner {
+    --fq-spinner-color: var(--color-text-on-primary);
+    --fq-spinner-diameter: 27px;
+    --fq-spinner-stroke-width: 3px;
+
+    @include mobile {
+      --fq-spinner-diameter: 24px;
+    }
+  }
+
+  &--primary {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-on-primary);
+
+    &:hover:not(.btn--disabled) {
+      background-color: var(--color-background-primary-active);
+    }
+  }
+
+  &--outline {
+    border: var(--border-primary);
+    background-color: var(--color-text-on-primary);
+    color: var(--color-background-primary);
+
+    &:hover:not(.btn--disabled) {
+      border: var(--border-primary-active);
+      background-color: var(--color-background-light);
+      color: var(--color-background-primary-active);
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--small {
+    padding: 8px 12px;
+    font-size: 14px;
+
+    @include mobile-above {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+  }
+
+  &--medium {
+    padding: 10px 28px;
+    font-size: 16px;
+
+    @include mobile-above {
+      padding: 12px 32px;
+      font-size: 18px;
+    }
+  }
+
+  &--large {
+    padding: 12px 32px;
+    font-size: 18px;
+
+    @include mobile-above {
+      padding: 16px 36px;
+      font-size: 20px;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--square, &--circle {
+    min-width: unset;
+
+    &.btn--small {
+      padding: 8px;
+
+      @include mobile-above {
+        padding: 10px;
+      }
+    }
+
+    &.btn--medium {
+      padding: 10px;
+
+      @include mobile-above {
+        padding: 12px;
+      }
+    }
+
+    &.btn--large {
+      padding: 14px;
+
+      @include mobile-above {
+        padding: 18px;
+      }
+    }
+  }
+
+  &--circle {
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+
+  &--text {
+    min-width: unset;
+    padding: 0;
+    background-color: transparent;
+    color: var(--color-background-primary);
+    font-size: 20px;
+
+    &:hover {
+      color: var(--color-background-primary-active);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use '../../../../styles/helpers/media' as *;
+
+.dialog {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    @include mobile {
+      row-gap: 12px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,95 @@
+@use '../../../styles/helpers/media' as *;
+
+.upload {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  row-gap: 50px;
+  width: 100%;
+
+  @include tablet {
+    row-gap: 30px;
+  }
+
+  @include tablet-above {
+    display: grid;
+    grid-template-areas:
+    'title .'
+    'activity user';
+    grid-template-columns: repeat(2, 1fr);
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      content: '';
+      background-color: #e0e0e0;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__title {
+    order: 1;
+
+    @include tablet-above {
+      grid-area: title;
+    }
+  }
+
+  &__file-column {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    @include tablet-above {
+      grid-area: activity;
+      padding-right: 20px;
+    }
+
+    @include laptop-above {
+      padding-right: 70px;
+    }
+
+    @include mobile {
+      gap: 20px;
+    }
+  }
+
+  &__metadata {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+
+    @include tablet-above {
+      grid-area: user;
+      padding-left: 20px;
+    }
+
+    @include laptop-above {
+      padding-left: 70px;
+    }
+  }
+
+  &__file-column, &__metadata{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: stretch;
+
+    @include mobile-s {
+      display: block;
+    }
+  }
+}

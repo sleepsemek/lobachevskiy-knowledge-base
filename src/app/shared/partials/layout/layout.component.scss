@@ -1,0 +1,13 @@
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.layout__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

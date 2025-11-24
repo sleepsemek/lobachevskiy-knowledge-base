@@ -1,0 +1,65 @@
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  display: inline-block;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background-color: var(--color-background-input);
+  transition: var(--transition-duration);
+
+  &:hover {
+    border: var(--input-border-focus);
+  }
+
+  &.checked {
+    background-color: var(--color-background-primary);
+
+    .checkmark {
+      color: var(--color-text-on-primary);
+    }
+  }
+
+  &.disabled {
+    background-color: var(--color-background-disabled);
+    cursor: not-allowed;
+
+    &.checked {
+      background-color: var(--color-background-light);
+      border-color: var(--color-background-disabled);
+    }
+  }
+}
+
+.checkbox-label {
+  font-size: 20px;
+  text-wrap: wrap;
+  user-select: none;
+
+  .checkbox-wrapper.disabled & {
+    color: var(--color-text-light);
+    cursor: not-allowed;
+  }
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+.required-marker {
+  color: var(--color-text-error);
+}

@@ -1,0 +1,99 @@
+@use '../../../styles/helpers/mixins' as *;
+
+.notification-container {
+  position: fixed;
+  z-index: 500;
+  top: 103px;
+  right: 20px;
+  max-width: 320px;
+}
+
+.notification {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding: 16px 12px;
+  border-radius: 10px;
+  animation: slideIn var(--transition-duration);
+  gap: 12px;
+  box-shadow: var(--box-shadow);
+
+  &__cross {
+    @include cross
+  }
+
+  &__title {
+    color: currentcolor;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__message {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  &__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: none;
+    color: currentcolor;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:hover {
+      background-color: rgb(0 0 0 / 10%);
+    }
+  }
+}
+
+.notification--success {
+  border: var(--input-border-success);
+  background-color: var(--color-background-success);
+  color: var(--color-text-success);
+}
+
+.notification--error {
+  border: var(--input-border-error);
+  background-color: var(--color-background-error);
+  color: var(--color-text-error);
+}
+
+.notification--warning {
+  border: var(--input-border-warning);
+  background-color: var(--color-background-warning);
+  color: var(--color-text-warning);
+}
+
+.notification--info {
+  border: var(--input-border-info);
+  background-color: var(--color-background-info);
+  color: var(--color-text-info);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

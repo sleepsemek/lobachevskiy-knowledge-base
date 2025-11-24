@@ -1,0 +1,106 @@
+<h1 class="auth-header">Авторизация в системе «База знаний Лобачевский»</h1>
+<section class="auth-section">
+  <div class="auth-form__content">
+    <div class="auth-form__header">
+      <h2 class="auth-form__title">
+        {{ isLoginMode() ? 'С возвращением!' : 'Добро пожаловать!' }}
+      </h2>
+
+      <app-segmented-control
+        [options]="authModeOptions"
+        [value]="isLoginMode() ? 'login' : 'register'"
+        (valueChange)="onAuthModeChange($event)"
+        size="medium"
+        name="authMode"
+      ></app-segmented-control>
+    </div>
+
+    <form
+      [formGroup]="currentForm()"
+      (ngSubmit)="onSubmit()"
+      novalidate
+      class="auth-form"
+    >
+      <div class="auth-form__content">
+        @if (!isLoginMode()) {
+          <fq-input
+            label="Имя"
+            placeholder="Иван"
+            formControlName="firstName"
+            [required]="true"
+          ></fq-input>
+
+          <fq-input
+            label="Фамилия"
+            placeholder="Иванов"
+            formControlName="lastName"
+            [required]="true"
+          ></fq-input>
+
+          <fq-input
+            label="Отчество"
+            placeholder="Иванович"
+            formControlName="middleName"
+            [required]="false"
+          ></fq-input>
+
+          <fq-select
+            label="Подразделение"
+            placeholder="Выберите подразделение"
+            [options]="departments()"
+            formControlName="department_id"
+            [required]="true"
+            [disabled]="loadingDepartments()"
+          ></fq-select>
+
+          <fq-input
+            label="Телефон"
+            placeholder="+7 (999) 123-45-67"
+            type="tel"
+            mask="+0 (000) 000-00-00"
+            formControlName="phone"
+            [required]="true"
+          ></fq-input>
+        }
+
+        <fq-input
+          label="Email"
+          placeholder="john@wick.com"
+          type="email"
+          formControlName="email"
+          [required]="true"
+        ></fq-input>
+
+        <fq-input
+          label="Пароль"
+          placeholder="Огурец1997"
+          type="password"
+          formControlName="password"
+          [required]="true"
+        ></fq-input>
+
+        @if (!isLoginMode()) {
+          <fq-input
+            label="Повторите пароль"
+            placeholder="Повторите ваш пароль"
+            type="password"
+            formControlName="confirmPassword"
+            [required]="true"
+          ></fq-input>
+        }
+      </div>
+
+      <div class="auth-form__footer">
+        <fq-button
+          type="submit"
+          variant="primary"
+          size="medium"
+          [disabled]="currentForm().invalid"
+          [loading]="submitted()"
+        >
+          {{ isLoginMode() ? 'Войти' : 'Зарегистрироваться' }}
+        </fq-button>
+      </div>
+    </form>
+  </div>
+</section>

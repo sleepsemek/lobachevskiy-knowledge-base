@@ -1,0 +1,29 @@
+@switch (this.as) {
+  @case ('article') {
+    <article>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </article>
+  }
+
+  @case ('section') {
+    <section>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </section>
+  }
+
+  @case ('aside') {
+    <aside>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </aside>
+  }
+
+  @default {
+    <div>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  }
+}
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

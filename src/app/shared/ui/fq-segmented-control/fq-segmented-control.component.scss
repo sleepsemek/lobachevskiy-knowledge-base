@@ -1,0 +1,102 @@
+@use '../../../../styles/helpers/mixins' as *;
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  display: block;
+
+  @include mobile-s {
+    width: 100%;
+  }
+}
+
+.segmented-control {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: var(--input-border);
+  border-radius: 12px;
+  transition: var(--transition-duration);
+
+  @include mobile-s {
+    width: 100%;
+  }
+
+  &--medium {
+    .segmented-control__button {
+      padding: 10px 28px;
+      font-size: 16px;
+
+      @include mobile-above {
+        padding: 12px 32px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  &--large {
+    .segmented-control__button {
+      padding: 12px 32px;
+      font-size: 18px;
+
+      @include mobile-above {
+        padding: 16px 36px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  &__label {
+    position: relative;
+    cursor: pointer;
+
+    @include mobile-s {
+      flex: 1;
+    }
+  }
+
+  &__input {
+    @include visually-hidden;
+
+    &:checked + .segmented-control__button {
+      background: var(--color-background-primary);
+      color: var(--color-text-on-primary);
+      cursor: default;
+    }
+  }
+
+  &__button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-text-light);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    transition: all var(--transition-duration);
+    cursor: pointer;
+    user-select: none;
+
+    @include mobile-above {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+  }
+}
+
+.segmented-control__input:not(:checked) + .segmented-control__button:hover {
+  background: var(--color-background-primary);
+  color: var(--color-text-on-primary);
+  cursor: pointer;
+}
+
+.segmented-control:has(.segmented-control__input:not(:checked) + .segmented-control__button:hover) .segmented-control__input:checked + .segmented-control__button {
+  background: var(--color-background-light);
+  color: var(--color-text-light);
+}
+
+.segmented-control:has(.segmented-control__input:focus-visible) .segmented-control__input:not(:checked) + .segmented-control__button {
+  outline: var(--input-border-focus);
+}

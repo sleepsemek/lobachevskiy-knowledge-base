@@ -1,0 +1,50 @@
+@use '../../../../styles/helpers/media' as *;
+
+:host {
+  width: fit-content;
+}
+
+.badge {
+  display: block;
+  padding: 4px 12px;
+  border: var(--border-primary);
+  border-radius: 12px;
+}
+
+.primary {
+  color: var(--color-background-primary);
+  font-weight: 500;
+}
+
+.secondary {
+  border: var(--input-border);
+  color: var(--color-text-light);
+}
+
+.success {
+  border: var(--input-border-success);
+  color: var(--color-text-success);
+}
+
+.error {
+  border: 1px solid var(--color-text-error);
+  color: var(--color-text-error);
+}
+
+.large {
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-size: 24px;
+
+  @include tablet {
+    padding: 6px 18px;
+    border-radius: 14px;
+    font-size: 18px;
+  }
+
+  @include mobile {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+}

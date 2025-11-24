@@ -1,0 +1,61 @@
+<div class="user-menu">
+  <button
+    #trigger
+    class="user-menu__trigger"
+    type="button"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-controls]="isOpen ? 'user-menu-dropdown' : null"
+    (click)="toggle()"
+  >
+    <div class="user">
+      <fq-avatar
+        [firstName]="user?.first_name || ''"
+        [lastName]="user?.last_name || ''"
+        size="large"
+      />
+<!--      <div class="user__data">-->
+<!--        <div class="user__name">-->
+<!--          <span>{{ user?.first_name }}</span>-->
+<!--          <span>{{ user?.last_name }}</span>-->
+<!--        </div>-->
+<!--        <span class="user__department ">{{ user?.department_name }}</span>-->
+<!--      </div>-->
+    </div>
+  </button>
+
+  @if (isOpen) {
+    <div
+      #menu
+      id="user-menu-dropdown"
+      class="user-menu__dropdown"
+      role="menu"
+      tabindex="-1"
+      aria-orientation="vertical"
+      (keydown)="onMenuKeydown($event)"
+    >
+      <button role="menuitem" class="user-menu__item" data-action="profile" (click)="select('profile')">
+        Личный кабинет
+      </button>
+
+      <button role="menuitem" class="user-menu__item visible-mobile" data-action="collections" (click)="select('collections')">
+        Мои подборки
+      </button>
+
+      <button role="menuitem" class="user-menu__item visible-mobile" data-action="upload" (click)="select('upload')">
+        Загрузить файл
+      </button>
+
+      <div class="user-menu__divider"></div>
+
+      <button
+        role="menuitem"
+        class="user-menu__item user-menu__item--danger"
+        data-action="logout"
+        (click)="select('logout')"
+      >
+        Выйти
+      </button>
+    </div>
+  }
+</div>

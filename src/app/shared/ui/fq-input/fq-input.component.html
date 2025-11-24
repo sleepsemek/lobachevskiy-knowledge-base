@@ -1,0 +1,57 @@
+@if (label) {
+  <div class="input__title">
+    @if (required) {
+      <span class="input__title-required">* </span>
+    }
+    <span>{{ label }}</span>
+  </div>
+}
+
+<label class="input input--medium"
+       [class.input--small]="size === 'small'"
+       [class.input--medium]="size === 'medium'"
+       [class.input--large]="size === 'large'"
+       [class.input--error]="showError"
+       [class.input--ai]="variant === 'ai'"
+       [class.input--disabled]="disabled">
+
+  @if (iconTpl) {
+    <div class="input__icon">
+      <ng-container [ngTemplateOutlet]="iconTpl"></ng-container>
+    </div>
+  }
+
+  <input
+    class="input__field"
+    [type]="type"
+    [name]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="handleInput($event)"
+    (blur)="onBlur()"
+    [disabled]="disabled"
+    [mask]="mask"
+    [required]="required"
+    [showMaskTyped]="true"
+    [dropSpecialCharacters]="false"
+    inputmode="text"
+    autocomplete="off"
+  />
+
+  @if (hasValue()) {
+    <button
+      type="button"
+      class="input__clear"
+      (click)="clear()"
+      aria-label="Очистить"
+    >
+      <div class="input__cross"></div>
+    </button>
+  }
+</label>
+
+@if (showError) {
+  <div class="input__error" role="alert">
+    {{ errorMessage }}
+  </div>
+}

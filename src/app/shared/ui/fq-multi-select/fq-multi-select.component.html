@@ -1,0 +1,17 @@
+<div class="fq-multi-select">
+  <p-multi-select
+    [options]="options"
+    [ngModel]="selectedValues"
+    (onChange)="handleSelectionChange($event.value)"
+    [placeholder]="placeholder"
+    [maxSelectedLabels]="3"
+    [disabled]="disabled"
+    [optionLabel]="optionLabel"
+  >
+  </p-multi-select>
+  @if (iconTpl) {
+    <div class="fq-multi-select__icon">
+      <ng-container [ngTemplateOutlet]="iconTpl"></ng-container>
+    </div>
+  }
+</div>
