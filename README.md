@@ -1,59 +1,28 @@
-# AngularTemplate
+# База знаний «Лобачевский»
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+[![Хакатон](https://img.shields.io/badge/хакатон-GorkyCode-blue)](https://gorkycode.ru)
+[![Angular](https://img.shields.io/badge/Frontend-Angular-red?logo=angular)](https://angular.io/)
 
-## Development server
+Интеллектуальная система, предназначенная для преодоления информационной разрозненности. База знаний объединяет документы из различных источников, предоставляя семантический поиск на базе RAG системы и интерактивный граф знаний для формирования семантических связей и моментальной навигации по документам.
 
-To start a local development server, run:
+> Фронтенд-часть проекта
 
-```bash
-ng serve
-```
+## Почему Angular?
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+*   **Энтерпрайз-уровень** - Безопасность и долгосрочна поддержка
+*   **Быстрая разработка** - архитектура, CLI и все нужное "из коробки"
+*   **TypeScript** - надежная кодовая база, самодокументация и удобство поддержки
+*   **Масштабируемость** - соблюдение строкой структуры проекта позволяет легко расширять функционал
 
-## Code scaffolding
+## Особенности решения
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+*   **Библиотека компонентов** - разработана собственная UI-библиотека в фирменном стиле администрации Нижнего Новгорода
+*   **Современный UI/UX** - UX исследования, акцент на удобство в сценариях использования ЦА
+*   **Граф знаний** - интерактивная визуализация семантических связей между документами
+*   **Полная доступность** - поддержка WCAG 2.1, семантическая верстка и навигация с клавиатуры
 
-```bash
-ng generate component component-name
-```
+<img width="2099" height="1402" alt="image" src="https://github.com/user-attachments/assets/236a2a27-a4b5-47ed-a6cd-e41656f03c31" />
+<img width="2559" height="1415" alt="image" src="https://github.com/user-attachments/assets/8f609a20-0eab-40a0-910d-10c4a3d43c8c" />
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Проект создан в рамках хакатона GorkyCode 2025
